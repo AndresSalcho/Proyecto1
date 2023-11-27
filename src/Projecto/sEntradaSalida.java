@@ -5,11 +5,9 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class sEntradaSalida {
-    String[] files;
-    String[] Local;
-    String[] Retiro;
-    String[] Entrega;
+    String[] files, Local, Retiro, Entrega;
     int m;
+    int aux;
     Utilidades u = new Utilidades();
     sEntradaSalida(String ll, String rr, String ee, int mm) throws Exception {
         files = new String[]{ll, rr, ee};
@@ -32,15 +30,22 @@ public class sEntradaSalida {
             index++;
         }
 
-        for (String s : Local) {
+        IndividualSeparator(Local, "l");
+        IndividualSeparator(Retiro, "r");
+        IndividualSeparator(Entrega, "e");
+
+        for (String s : Local){
             System.out.println(s);
         }
-        for (String s : Retiro) {
+
+        for (String s : Retiro){
             System.out.println(s);
         }
-        for (String s : Entrega) {
+
+        for (String s : Entrega){
             System.out.println(s);
         }
+
     }
 
     private void readNLoad(String n, int ord){
@@ -88,6 +93,128 @@ public class sEntradaSalida {
         }
     }
 
+    private void IndividualSeparator(String[] s, String id){
+        char[] c;
+        boolean ready = false;
+        for (int j = 1; j < s.length; j++) {
+            int pos = 0;
+            c = s[j].toCharArray();
+            for (int i = 0; i < c.length; i++) {
+                if (c[i] == ';' && pos == 0) {
+                    aux = i;
+                    if (id.equals("l")) {
+                        Local[j - 1] = "Fecha: ";
+                    }
+                    if (id.equals("r")) {
+                        Retiro[j - 1] = "Fecha: ";
+                    }
+                    if (id.equals("e")) {
+                        Entrega[j - 1] = "Fecha: ";
+                    }
+                    for (int k = 0; k < aux; k++){
+                        if (id.equals("l")) {
+                            Local[j - 1] += c[k];
+                        }
+                        if (id.equals("r")) {
+                            Retiro[j - 1] += c[k];
+                        }
+                        if (id.equals("e")) {
+                            Entrega[j - 1] += c[k];
+                        }
+                    }
+                    ready = true;
+                }else if (c[i] == ';' && pos == 1) {
+                    if (id.equals("l")) {
+                        Local[j - 1] += " | Venta: ";
+                    }
+                    if (id.equals("r")) {
+                        Retiro[j - 1] += " | Venta: ";
+                    }
+                    if (id.equals("e")) {
+                        Entrega[j - 1] += " | Venta: ";
+                    }
+                    for (int k = aux + 1; k < i; k++){
+                        if (id.equals("l")) {
+                            Local[j - 1] += c[k];
+                        }
+                        if (id.equals("r")) {
+                            Retiro[j - 1] += c[k];
+                        }
+                        if (id.equals("e")) {
+                            Entrega[j - 1] += c[k];
+                        }
+                    }
+                    aux = i;
+                    ready = true;
+                }else if (c[i] == ';' && pos == 2) {
+                    if (id.equals("l")) {
+                        Local[j - 1] += " | Costo: ";
+                    }
+                    if (id.equals("r")) {
+                        Retiro[j - 1] += " | Costo: ";
+                    }
+                    if (id.equals("e")) {
+                        Entrega[j - 1] += " | Costo: ";
+                    }
+                    for (int k = aux + 1; k < i; k++){
+                        if (id.equals("l")) {
+                            Local[j - 1] += c[k];
+                        }
+                        if (id.equals("r")) {
+                            Retiro[j - 1] += c[k];
+                        }
+                        if (id.equals("e")) {
+                            Entrega[j - 1] += c[k];
+                        }
+                    }
+                    aux = i;
+                    ready = true;
+                }else if (c[i] == ';' && pos == 3) {
+                    if (id.equals("l")) {
+                        Local[j - 1] += " | Impuesto: ";
+                    }
+                    if (id.equals("r")) {
+                        Retiro[j - 1] += " | Empaque: ";
+                    }
+                    if (id.equals("e")) {
+                        Entrega[j - 1] += " | Envio: ";
+                    }
+                    for (int k = aux + 1; k < i; k++){
+                        if (id.equals("l")) {
+                            Local[j - 1] += c[k];
+                        }
+                        if (id.equals("r")) {
+                            Retiro[j - 1] += c[k];
+                        }
+                        if (id.equals("e")) {
+                            Entrega[j - 1] += c[k];
+                        }
+                    }
+                    aux = i;
+                    ready = true;
+                    i -= 2;
+                }else if (c[i] == ';' && pos == 4 && id.equals("e")) {
+                    Entrega[j - 1] += " | Entregado: ";
+                    for (int k = i + 1; k < c.length; k++) {
+                        Entrega[j - 1] += c[k];
+                    }
+                    aux = i;
+                    ready = true;
+                }else if (ready){
+                    ready = false;
+                    pos++;
+                }
+            }
 
-
+        }
+        if (id.equals("l")) {
+            Local[Local.length-1] = "--------------------------------------------------------------------";
+        }
+        if (id.equals("r")) {
+            Retiro[Local.length-1] = "--------------------------------------------------------------------";
+        }
+        if (id.equals("e")) {
+            Entrega[Local.length-1] = "--------------------------------------------------------------------";
+        }
+    }
 }
