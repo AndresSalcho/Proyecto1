@@ -24,6 +24,13 @@ public class Main {
             }
         }
 
+        if (l == null || r == null || e == null || m == 0){
+            System.out.println("Alguno de los archivos fué mal colocado o hace falta");
+            System.out.println("Es necesario que los parametros especifiquen la ruta de los archivos y la cantidad de meses a analizar");
+            System.out.println("-l <ruta> -r <ruta> -e <ruta> -m <meses>");
+            return;
+        }
+
         Menu menu = new Menu(l,r,e,m);
 
     }

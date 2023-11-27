@@ -15,5 +15,6 @@ public class Menu {
     }
     private void run() throws Exception {
         sEntradaSalida s = new sEntradaSalida(l,r,e,m);
+        System.out.print("\033[H\033[2J");
     }
 }
