@@ -11,6 +11,7 @@ public class Menu {
         r = rr;
         e = ee;
         m = mm;
+        run();
     }
     public void run(){
         sEntradaSalida s = new sEntradaSalida(l,r,e,m);
