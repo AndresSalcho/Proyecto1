@@ -1,17 +1,13 @@
 package Projecto;
 import  com.aspose.cells.Workbook;
-import com.sun.jdi.event.ExceptionEvent;
-
-import java.util.concurrent.ExecutionException;
 
 public class Utilidades {
     String aux;
-    public void Convert(String r, String n) throws Exception {
+    public void Convert(String r, String n){
         try {
             Workbook xl = new Workbook(r);
             xl.save(n + ".csv");
-        } catch(Exception e){
-            throw new Exception();
+        } catch(Exception ignored){
         }
     }
     public String getFExt(String r){

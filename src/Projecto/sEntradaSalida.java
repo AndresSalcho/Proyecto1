@@ -9,13 +9,13 @@ public class sEntradaSalida {
     int m;
     int aux;
     Utilidades u = new Utilidades();
-    sEntradaSalida(String ll, String rr, String ee, int mm) throws Exception {
+    sEntradaSalida(String ll, String rr, String ee, int mm){
         files = new String[]{ll, rr, ee};
         m = mm;
         mainE();
     }
 
-    private void mainE() throws Exception {
+    private void mainE(){
         int index = 1;
         for (String f : files) {
             if (u.getFExt(f).equals("0")) {

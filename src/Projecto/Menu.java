@@ -6,15 +6,13 @@ public class Menu {
     String e;
     int m;
 
-    Menu(String ll, String rr, String ee, int mm) throws Exception {
+    Menu(String ll, String rr, String ee, int mm){
         l = ll;
         r = rr;
         e = ee;
         m = mm;
-        run();
     }
-    private void run() throws Exception {
+    public void run(){
         sEntradaSalida s = new sEntradaSalida(l,r,e,m);
-        System.out.print("\033[H\033[2J");
     }
 }
