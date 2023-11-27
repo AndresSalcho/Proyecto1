@@ -1,27 +1,27 @@
 package Pruebas;
 
-public class Nodo {
-    private double valor;
-    private Nodo siguiente;
+public class Nodo<T> {
+    private T valor;
+    private Nodo<T> siguiente;
 
-    Nodo(double valor){
+    Nodo(T valor){
         this.valor = valor;
         this.siguiente = null;
     }
 
-    public void setValor(double valor){
+    public void setValor(T valor){
         this.valor = valor;
     }
 
-    public double getValor(){
+    public T getValor(){
         return this.valor;
     }
 
-    public void setSiguiente(Nodo siguiente){
+    public void setSiguiente(Nodo<T> siguiente){
         this.siguiente = siguiente;
     }
 
-    public Nodo getSiguiente(){
+    public Nodo<T> getSiguiente(){
         return this.siguiente;
     }
 }

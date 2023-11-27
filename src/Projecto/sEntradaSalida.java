@@ -2,14 +2,17 @@ package Projecto;
 import java.io.File;
 import java.io.File.*;
 import java.io.FileNotFoundException;
+import java.text.ParseException;
 import java.util.Scanner;
 
 public class sEntradaSalida {
     String[] files, Local, Retiro, Entrega;
-    String[] fecha;
+    String[] fechaL, fechaR, fechaE;
     int m;
     int aux;
+    int save;
     Utilidades u = new Utilidades();
+    uLogica ul = new uLogica();
     sEntradaSalida(String ll, String rr, String ee, int mm){
         files = new String[]{ll, rr, ee};
         m = mm;
@@ -35,11 +38,36 @@ public class sEntradaSalida {
         IndividualSeparator(Retiro, "r");
         IndividualSeparator(Entrega, "e");
 
-        fecha = u.getFechas(Local);
+        fechaL = u.getFechas(Local);
+        fechaR = u.getFechas(Retiro);
+        fechaE = u.getFechas(Entrega);
 
-        for (String f : fecha){
-            System.out.println(f);
+        fechaL = ul.OrdenarFecha(fechaL, m);
+        fechaR = ul.OrdenarFecha(fechaR, m);
+        fechaE = ul.OrdenarFecha(fechaE, m);
+
+        Local = ul.OrdenarColumnas(Local, fechaL);
+        Retiro = ul.OrdenarColumnas(Retiro, fechaR);
+        Entrega = ul.OrdenarColumnas(Entrega, fechaE);
+
+        for (String f : Local){
+            if (f != null) {
+                System.out.println(f);
+            }
         }
+        System.out.println(" ");
+        for (String f : Retiro){
+            if (f != null) {
+                System.out.println(f);
+            }
+        }
+        System.out.println(" ");
+        for (String f : Entrega){
+            if (f != null) {
+                System.out.println(f);
+            }
+        }
+
 
     }
 
@@ -53,11 +81,8 @@ public class sEntradaSalida {
                 scan.nextLine();
                 index++;
             }
-
             archivo = new File(n);
             scan = new Scanner(archivo);
-
-
             if(ord == 1) {
                 Local = new String[index];
                 index = 0;
@@ -164,6 +189,10 @@ public class sEntradaSalida {
                     }
                     aux = i;
                     ready = true;
+                    if (!id.equals("e")) {
+                        i -= 2;
+                        save = c.length;
+                    }
                 }else if (c[i] == ';' && pos == 3) {
                     if (id.equals("l")) {
                         Local[j - 1] += " | Impuesto: ";
@@ -174,7 +203,10 @@ public class sEntradaSalida {
                     if (id.equals("e")) {
                         Entrega[j - 1] += " | Envio: ";
                     }
-                    for (int k = aux + 1; k < i; k++){
+                    if (id.equals("e")) {
+                        save = i;
+                    }
+                    for (int k = aux + 1; k < save; k++){
                         if (id.equals("l")) {
                             Local[j - 1] += c[k];
                         }
@@ -187,7 +219,9 @@ public class sEntradaSalida {
                     }
                     aux = i;
                     ready = true;
-                    i -= 2;
+                    if (id.equals("e")) {
+                        i -= 2;
+                    }
                 }else if (c[i] == ';' && pos == 4 && id.equals("e")) {
                     Entrega[j - 1] += " | Entregado: ";
                     for (int k = i + 1; k < c.length; k++) {
