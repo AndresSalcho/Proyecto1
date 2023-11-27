@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class sEntradaSalida {
     String[] files, Local, Retiro, Entrega;
+    String[] fecha;
     int m;
     int aux;
     Utilidades u = new Utilidades();
@@ -34,16 +35,10 @@ public class sEntradaSalida {
         IndividualSeparator(Retiro, "r");
         IndividualSeparator(Entrega, "e");
 
-        for (String s : Local){
-            System.out.println(s);
-        }
+        fecha = u.getFechas(Local);
 
-        for (String s : Retiro){
-            System.out.println(s);
-        }
-
-        for (String s : Entrega){
-            System.out.println(s);
+        for (String f : fecha){
+            System.out.println(f);
         }
 
     }

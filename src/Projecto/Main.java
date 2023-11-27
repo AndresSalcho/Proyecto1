@@ -1,12 +1,14 @@
 package Projecto;
 
+import java.io.IOException;
+
 public class Main {
 
     static String l;
     static String r;
     static String e;
     static int m;
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, InterruptedException {
 
         for (int i = 0; i < args.length; i++){
             if (args[i].equals("-l")){
@@ -31,6 +33,7 @@ public class Main {
             return;
         }
         Menu menu = new Menu(l,r,e,m);
+        menu.run();
 
     }
 }

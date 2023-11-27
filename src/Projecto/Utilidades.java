@@ -3,6 +3,7 @@ import  com.aspose.cells.Workbook;
 
 public class Utilidades {
     String aux;
+    int Iaux, Iaux2;
     public void Convert(String r, String n){
         try {
             Workbook xl = new Workbook(r);
@@ -45,5 +46,39 @@ public class Utilidades {
             aux = aux + c[i];
         }
         return aux;
+    }
+
+    public String[] getFechas(String[] s) {
+        char[] c;
+        String[] date = new String[s.length-1];
+        boolean ready = false;
+        for (int j = 0; j < s.length-1; j++) {
+            int pos = 0;
+            c = s[j].toCharArray();
+            for (int i = 0; i < c.length; i++) {
+                if (c[i] == ':' && pos == 0) {
+                    Iaux = i;
+                    ready = true;
+                }else if(c[i] == '/'){
+                    if (pos == 2){
+                        Iaux2 = i;
+                    }
+                    if(pos == 1){
+                        ready = true;
+                    }
+                }else if (ready) {
+                    ready = false;
+                    pos++;
+                }
+            }
+            for (int k = Iaux+2; k < Iaux2+5; k++) {
+                if(k == Iaux+2){
+                    date[j] = "";
+                }
+                date[j] += c[k];
+
+            }
+        }
+        return date;
     }
 }
