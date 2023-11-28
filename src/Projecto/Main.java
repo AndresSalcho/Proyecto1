@@ -8,7 +8,7 @@ public class Main {
     static String r;
     static String e;
     static int m;
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args){
 
         for (int i = 0; i < args.length; i++){
             if (args[i].equals("-l")){

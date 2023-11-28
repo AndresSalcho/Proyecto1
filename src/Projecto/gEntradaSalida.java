@@ -8,15 +8,15 @@ public class gEntradaSalida {
     String[] files, Local, Retiro, Entrega;
     String[] fechaL, fechaR, fechaE;
     String[] ValL, ValR, ValE;
-    double[] vL, vR, vE;
+    public double[] vL, vR, vE;
     int m;
     int aux;
     int save;
     Utilidades u = new Utilidades();
     uLogica ul = new uLogica();
-    ListaEnlazada<String> L = new ListaEnlazada<>();
-    ListaEnlazada<String> R = new ListaEnlazada<>();
-    ListaEnlazada<String> E = new ListaEnlazada<>();
+    public ListaEnlazada<String> L = new ListaEnlazada<>();
+    public ListaEnlazada<String> R = new ListaEnlazada<>();
+    public ListaEnlazada<String> E = new ListaEnlazada<>();
 
     gEntradaSalida(String ll, String rr, String ee, int mm){
         files = new String[]{ll, rr, ee};
