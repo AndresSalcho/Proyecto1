@@ -8,6 +8,8 @@ import java.math.RoundingMode;
 public class Utilidades {
     String aux;
     int Iaux, Iaux2;
+
+    //Covierte los archivos .xlsx a .csv para su manejo
     public void Convert(String r, String n){
         try {
             Workbook xl = new Workbook(r);
@@ -15,6 +17,8 @@ public class Utilidades {
         } catch(Exception ignored){
         }
     }
+
+    //Averigua cual es la extension del archivo
     public String getFExt(String r){
         char[] c;
         c = r.toCharArray();
@@ -36,6 +40,8 @@ public class Utilidades {
             return aux;
         }
     }
+
+    //Si se convierte un archivo, se extrae el nombre del archivo para crearlo con el mismo nombre
     public String getFName(String r) {
         int a = 0;
         char[] c;
@@ -52,6 +58,7 @@ public class Utilidades {
         return aux;
     }
 
+    //Descompone el String de la fecha y extrae solo la parte numérica
     public String[] getFechas(String[] s) {
         char[] c;
         String[] date = new String[s.length-1];
@@ -85,6 +92,8 @@ public class Utilidades {
         }
         return date;
     }
+
+    //Busca cual es el siguente espacio en blanco del array e intrduce ahi el valor
     public String[] nextBSpace(String[] a, String s){
         boolean ended = false;
         for (int i = 0; i < a.length; i++){
@@ -98,6 +107,9 @@ public class Utilidades {
         }
         return a;
     }
+
+    //Algunos arrays quedan con celdas null, y no me sirve asi que esta funcion registra
+    //solo las celdas con datos en un array nuevo sin casillas nulls
     public String[] convertNotNull(String[] a){
         int count = 0;
         for (String s : a) {
@@ -114,10 +126,14 @@ public class Utilidades {
         }
      return notNull;
     }
+
+    //Reduce la cantidad de decimales que muestra a 2
     public double DecimalF(double d){
         BigDecimal b = new BigDecimal(d);
         return b.setScale(2, RoundingMode.HALF_UP).doubleValue();
     }
+
+    //Metodo para limpiar la pantalla, SOLO SIRVE EN CMD!!
     public void cls(){
         try{
             new ProcessBuilder("cmd","/c","cls").inheritIO().start().waitFor();

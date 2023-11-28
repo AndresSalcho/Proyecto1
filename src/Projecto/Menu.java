@@ -18,6 +18,7 @@ public class Menu {
         m = mm;
     }
 
+    //Encargado de iniciar el programa y mostrar la interfaz
     public void run() {
         try {
             u.cls();

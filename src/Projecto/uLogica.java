@@ -17,6 +17,11 @@ public class uLogica {
     Abstract<Long> al = new Abstract<>();
     String[] Fecha;
 
+    /*Este metodo Ultiliza los valores de la fecha y los covierte en datos brutos de tipo date
+      utiliza los meses especificados por el usuario y los resta a la fecha actual del sistema
+      para obtener la fecha maxima a mostrar, con esos datos solo agrega las fechas que esten
+      dentro de ese rango las acomoda con QuickSort, recompone las fechas ya ordenadas y las retorna
+     */
     public String[] OrdenarFecha(String[] a, int m) {
 
         Fecha = a;
@@ -64,6 +69,11 @@ public class uLogica {
         }
         return F;
     }
+
+    /*Este metodo compara las fechas ordenadas con las que hay en los datos de los csv
+      y las utiliza para odenar los datos por la fecha y excluyendo los que no estan ahi
+      y las los retorna ya listos
+     */
     public String[] OrdenarColumnas(String[] a, String[] f) {
         String[] aux = new String[a.length - 1];
         for (int i = 0; i<f.length; i++){
@@ -77,6 +87,7 @@ public class uLogica {
         return aux;
     }
 
+    //Este metodo extrae los valores numericos de las ventas y los retorna
     public String[] getTotal(String[] s){
         char[] c;
         boolean ready = false;
@@ -138,6 +149,9 @@ public class uLogica {
         return values;
     }
 
+    /*Uno de los metodos mas importantes, utiliza los datos crudos del archivo csv y les da un formato visual
+      comprensible para el usuario y para los siguentes algoritmos
+     */
     public String[] IndividualSeparator(String[] s, String id){
         char[] c;
         boolean ready = false;
@@ -214,6 +228,7 @@ public class uLogica {
         return s;
     }
 
+    //Extrae, las ganancias, las perdidas y su diferencia
     public double[] getMargen(String[] a){
         double total;
         double Ganacias = 0.0;

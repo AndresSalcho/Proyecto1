@@ -6,7 +6,7 @@ public class Main {
     static String e;
     static int m;
     public static void main(String[] args){
-
+        //Lee los parametros de ejecucion y los guarda
         for (int i = 0; i < args.length; i++){
             if (args[i].equals("-l")){
                 l = args[i+1];
@@ -22,6 +22,7 @@ public class Main {
             }
         }
 
+        //Comprueba que dichos parametros sean correctos
         if (l == null || r == null || e == null || m == 0){
             System.out.println(" ");
             System.out.println("Alguno de los archivos fué mal colocado o hace falta!!!");

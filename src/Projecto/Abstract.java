@@ -2,6 +2,8 @@ package Projecto;
 
 public class Abstract<T> {
     T aux;
+
+    //Algoritmo de ordenamiento ganador
     public T[] QuickSort(T[] a, int firstE, int lastE){
         int count = firstE - 1;
         if (firstE < lastE){
