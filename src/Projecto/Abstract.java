@@ -3,8 +3,6 @@ package Projecto;
 public class Abstract<T> {
     T aux;
     public T[] QuickSort(T[] a, int firstE, int lastE){
-        int hI;
-        long hL;
         int count = firstE - 1;
         if (firstE < lastE){
             for (int i = firstE; i <= lastE; i++){

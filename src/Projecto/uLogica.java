@@ -28,17 +28,17 @@ public class uLogica {
             d = f.parse(dt1).getTime() - f.parse(dt).getTime() - dia;
             today = Calendar.getInstance().getTime().getTime();
 
-        }catch (ParseException e){}
+        }catch (ParseException ignored){}
 
         int index = 0;
 
-        for (int i = 0; i < Fecha.length; i++) {
+        for (String s : Fecha) {
             try {
-                if (f.parse(Fecha[i]).getTime() > today - d * m){
-                    rawFecha[index] = f.parse(Fecha[i]).getTime();
+                if (f.parse(s).getTime() > today - d * m) {
+                    rawFecha[index] = f.parse(s).getTime();
                     index += 1;
                 }
-            } catch (ParseException e) {
+            } catch (ParseException ignored) {
             }
         }
 
@@ -81,7 +81,6 @@ public class uLogica {
         char[] c;
         boolean ready = false;
         int aux = 0;
-        int save = 0;
         String charset = "";
         String[] values = new String[s.length * 3];
         for (int j = 1; j < s.length; j++) {
@@ -216,7 +215,7 @@ public class uLogica {
     }
 
     public double[] getMargen(String[] a){
-        double total = 0.0;
+        double total;
         double Ganacias = 0.0;
         double Perdidas = 0.0;
         double[] vals = new double[3];

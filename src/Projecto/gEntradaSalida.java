@@ -10,8 +10,6 @@ public class gEntradaSalida {
     String[] ValL, ValR, ValE;
     public double[] vL, vR, vE;
     int m;
-    int aux;
-    int save;
     Utilidades u = new Utilidades();
     uLogica ul = new uLogica();
     public ListaEnlazada<String> L = new ListaEnlazada<>();
@@ -117,7 +115,6 @@ public class gEntradaSalida {
             }
         } catch (FileNotFoundException e) {
             System.out.println("Error al abrir el archivo!!!");
-            return;
         }
     }
 }

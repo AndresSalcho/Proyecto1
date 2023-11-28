@@ -1,7 +1,4 @@
 package Projecto;
-
-import java.io.IOException;
-
 public class Main {
 
     static String l;
