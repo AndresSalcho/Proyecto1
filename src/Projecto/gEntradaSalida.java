@@ -1,19 +1,18 @@
 package Projecto;
 import java.io.File;
-import java.io.File.*;
 import java.io.FileNotFoundException;
-import java.text.ParseException;
 import java.util.Scanner;
 
-public class sEntradaSalida {
+public class gEntradaSalida {
     String[] files, Local, Retiro, Entrega;
     String[] fechaL, fechaR, fechaE;
+    String[] ValL, ValR, ValE;
     int m;
     int aux;
     int save;
     Utilidades u = new Utilidades();
     uLogica ul = new uLogica();
-    sEntradaSalida(String ll, String rr, String ee, int mm){
+    gEntradaSalida(String ll, String rr, String ee, int mm){
         files = new String[]{ll, rr, ee};
         m = mm;
         mainE();
@@ -50,11 +49,20 @@ public class sEntradaSalida {
         Retiro = ul.OrdenarColumnas(Retiro, fechaR);
         Entrega = ul.OrdenarColumnas(Entrega, fechaE);
 
-        for (String f : Local){
+        Local = u.convertNotNull(Local);
+        Retiro = u.convertNotNull(Retiro);
+        Entrega = u.convertNotNull(Entrega);
+
+        ValL = ul.getTotal(Local);
+        ValR = ul.getTotal(Retiro);
+        ValE = ul.getTotal(Entrega);
+
+        for (String f : ValL){
             if (f != null) {
                 System.out.println(f);
             }
         }
+        /*
         System.out.println(" ");
         for (String f : Retiro){
             if (f != null) {
@@ -67,6 +75,7 @@ public class sEntradaSalida {
                 System.out.println(f);
             }
         }
+         */
 
 
     }

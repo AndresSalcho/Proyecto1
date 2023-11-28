@@ -28,10 +28,13 @@ public class uLogica {
 
         }catch (ParseException e){}
 
+        int index = 0;
+
         for (int i = 0; i < Fecha.length; i++) {
             try {
                 if (f.parse(Fecha[i]).getTime() > today - d * m){
-                    rawFecha[i] = f.parse(Fecha[i]).getTime();
+                    rawFecha[index] = f.parse(Fecha[i]).getTime();
+                    index += 1;
                 }
             } catch (ParseException e) {
             }
@@ -72,8 +75,60 @@ public class uLogica {
         return aux;
     }
 
-    public String[] getTotal(String[] a){
-        return a;
+    public String[] getTotal(String[] s){
+        char[] c;
+        boolean ready = false;
+        int aux = 0;
+        int save = 0;
+        String charset = "";
+        String[] values = new String[s.length * 3];
+        for (int j = 1; j < s.length; j++) {
+            int pos = 0;
+            c = s[j].toCharArray();
+            for (int i = 0; i < c.length; i++) {
+                if (c[i] == ':' && pos == 0) {
+                    ready = true;
+                }
+                if (c[i] == '|' && pos == 1) {
+                    ready = true;
+                }
+                if (c[i] == ':' && pos == 2) {
+                    aux = i + 2;
+                    ready = true;
+                }
+                if (c[i] == '|' && pos == 3) {
+                    for (int k = aux; k < i-1; k++) {
+                        charset += c[k];
+                    }
+                    values = u.nextBSpace(values, charset);
+                    charset = "";
+                    ready = true;
+                }
+                if (c[i] == ':' && pos == 4) {
+                    aux = i + 2;
+                    ready = true;
+                }
+                if (c[i] == '|' && pos == 5) {
+                    for (int k = aux; k < i-1; k++) {
+                        charset += c[k];
+                    }
+                    values = u.nextBSpace(values, charset);
+                    charset = "";
+                    ready = true;
+                } else if (c[i] == ':' && pos == 6) {
+                    for (int k = i + 2; k < c.length; k++) {
+                        charset += c[k];
+                    }
+                    values = u.nextBSpace(values, charset);
+                    charset = "";
+                    ready = true;
+                } else if (ready) {
+                    ready = false;
+                    pos++;
+                }
+            }
+        }
+        return values;
     }
 
     public String[] IndividualSeparator(String[] s, String id){
@@ -85,72 +140,27 @@ public class uLogica {
             int pos = 0;
             c = s[j].toCharArray();
             for (int i = 0; i < c.length; i++) {
-                if (c[i] == ';' && pos == 0) {
+                if (c[i] == ',' && pos == 0) {
                     aux = i;
-                    if (id.equals("l")) {
-                        s[j - 1] = "Fecha: ";
-                    }
-                    if (id.equals("r")) {
-                        s[j - 1] = "Fecha: ";
-                    }
-                    if (id.equals("e")) {
-                        s[j - 1] = "Fecha: ";
-                    }
+                    s[j - 1] = "Fecha: ";
+
                     for (int k = 0; k < aux; k++){
-                        if (id.equals("l")) {
-                            s[j - 1] += c[k];
-                        }
-                        if (id.equals("r")) {
-                            s[j - 1] += c[k];
-                        }
-                        if (id.equals("e")) {
-                            s[j - 1] += c[k];
-                        }
+                        s[j - 1] += c[k];
                     }
                     ready = true;
-                }else if (c[i] == ';' && pos == 1) {
-                    if (id.equals("l")) {
+                }else if (c[i] == ',' && pos == 1) {
                         s[j - 1] += " | Venta: ";
-                    }
-                    if (id.equals("r")) {
-                        s[j - 1] += " | Venta: ";
-                    }
-                    if (id.equals("e")) {
-                        s[j - 1] += " | Venta: ";
-                    }
+
                     for (int k = aux + 1; k < i; k++){
-                        if (id.equals("l")) {
-                            s[j - 1] += c[k];
-                        }
-                        if (id.equals("r")) {
-                            s[j - 1] += c[k];
-                        }
-                        if (id.equals("e")) {
-                            s[j - 1] += c[k];
-                        }
+                        s[j - 1] += c[k];
                     }
                     aux = i;
                     ready = true;
-                }else if (c[i] == ';' && pos == 2) {
-                    if (id.equals("l")) {
-                        s[j - 1] += " | Costo: ";
-                    }
-                    if (id.equals("r")) {
-                        s[j - 1] += " | Costo: ";
-                    }
-                    if (id.equals("e")) {
-                        s[j - 1] += " | Costo: ";
-                    }
+                }else if (c[i] == ',' && pos == 2) {
+                    s[j - 1] += " | Costo: ";
+
                     for (int k = aux + 1; k < i; k++){
-                        if (id.equals("l")) {
-                            s[j - 1] += c[k];
-                        }
-                        if (id.equals("r")) {
-                            s[j - 1] += c[k];
-                        }
-                        if (id.equals("e")) {
-                            s[j - 1] += c[k];
-                        }
+                        s[j - 1] += c[k];
                     }
                     aux = i;
                     ready = true;
@@ -158,7 +168,7 @@ public class uLogica {
                         i -= 2;
                         save = c.length;
                     }
-                }else if (c[i] == ';' && pos == 3) {
+                }else if (c[i] == ',' && pos == 3) {
                     if (id.equals("l")) {
                         s[j - 1] += " | Impuesto: ";
                     }
@@ -172,22 +182,14 @@ public class uLogica {
                         save = i;
                     }
                     for (int k = aux + 1; k < save; k++){
-                        if (id.equals("l")) {
-                            s[j - 1] += c[k];
-                        }
-                        if (id.equals("r")) {
-                            s[j - 1] += c[k];
-                        }
-                        if (id.equals("e")) {
-                            s[j - 1] += c[k];
-                        }
+                        s[j - 1] += c[k];
                     }
                     aux = i;
                     ready = true;
                     if (id.equals("e")) {
                         i -= 2;
                     }
-                }else if (c[i] == ';' && pos == 4 && id.equals("e")) {
+                }else if (c[i] == ',' && pos == 4 && id.equals("e")) {
                     s[j - 1] += " | Entregado: ";
                     for (int k = i + 1; k < c.length; k++) {
                         s[j - 1] += c[k];
@@ -201,16 +203,7 @@ public class uLogica {
             }
 
         }
-        if (id.equals("l")) {
-            s[s.length-1] = "--------------------------------------------------------------------";
-        }
-        if (id.equals("r")) {
-            s[s.length-1] = "--------------------------------------------------------------------";
-        }
-        if (id.equals("e")) {
-            s[s.length-1] = "--------------------------------------------------------------------";
-        }
-
+        s[s.length-1] = "--------------------------------------------------------------------";
         return s;
     }
 }

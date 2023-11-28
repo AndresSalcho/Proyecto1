@@ -7,7 +7,6 @@ public class Menu {
     String r;
     String e;
     int m;
-    boolean flag = true;
 
     Menu(String ll, String rr, String ee, int mm) throws IOException, InterruptedException {
         l = ll;
@@ -34,6 +33,6 @@ public class Menu {
         }
          */
 
-        sEntradaSalida s = new sEntradaSalida(l,r,e,m);
+        gEntradaSalida s = new gEntradaSalida(l,r,e,m);
     }
 }

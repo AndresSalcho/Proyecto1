@@ -81,4 +81,33 @@ public class Utilidades {
         }
         return date;
     }
+    public String[] nextBSpace(String[] a, String s){
+        boolean ended = false;
+        for (int i = 0; i < a.length; i++){
+            if(a[i] == null){
+                a[i] = s;
+                ended = true;
+            }
+            if (ended){
+                i = a.length;
+            }
+        }
+        return a;
+    }
+    public String[] convertNotNull(String[] a){
+        int count = 0;
+        for (String s : a) {
+            if (s == null) {
+                count++;
+            }
+        }
+        String[] notNull = new String[a.length - count];
+
+        for (String s : a) {
+            if (s != null) {
+                notNull = nextBSpace(notNull, s);
+            }
+        }
+     return notNull;
+    }
 }
