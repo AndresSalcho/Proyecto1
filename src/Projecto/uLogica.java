@@ -1,5 +1,7 @@
 package Projecto;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -115,14 +117,20 @@ public class uLogica {
                     values = u.nextBSpace(values, charset);
                     charset = "";
                     ready = true;
-                } else if (c[i] == ':' && pos == 6) {
+                }
+                if (c[i] == ':' && pos == 6) {
                     for (int k = i + 2; k < c.length; k++) {
-                        charset += c[k];
+                        if(c[k] == ' '){
+                            k = c.length;
+                        }else {
+                            charset += c[k];
+                        }
                     }
                     values = u.nextBSpace(values, charset);
                     charset = "";
                     ready = true;
-                } else if (ready) {
+                }
+                if (ready) {
                     ready = false;
                     pos++;
                 }
@@ -148,7 +156,7 @@ public class uLogica {
                         s[j - 1] += c[k];
                     }
                     ready = true;
-                }else if (c[i] == ',' && pos == 1) {
+                }else if (c[i] == ','  && pos == 1) {
                         s[j - 1] += " | Venta: ";
 
                     for (int k = aux + 1; k < i; k++){
@@ -205,6 +213,41 @@ public class uLogica {
         }
         s[s.length-1] = "--------------------------------------------------------------------";
         return s;
+    }
+
+    public double[] getMargen(String[] a){
+        double total = 0.0;
+        double Ganacias = 0.0;
+        double Perdidas = 0.0;
+        double[] vals = new double[3];
+
+        for (int i = 0; i < a.length; i += 3){
+            if (a[i] !=null) {
+                Ganacias += Double.parseDouble((a[i]));
+            }
+        }
+        for (int i = 1; i < a.length; i += 3){
+            if (a[i] !=null) {
+                Perdidas += Double.parseDouble(a[i]);
+            }
+        }
+        for (int i = 2; i < a.length; i += 3){
+            if (a[i] !=null) {
+                Perdidas += Double.parseDouble(a[i]);
+            }
+        }
+
+        total = Ganacias - Perdidas;
+        BigDecimal d = new BigDecimal(total);
+        BigDecimal d1 = new BigDecimal(Ganacias);
+        BigDecimal d2 = new BigDecimal(Perdidas);
+
+        vals[0] = d.setScale(2, RoundingMode.HALF_UP).doubleValue();
+        vals[1] = d1.setScale(2, RoundingMode.HALF_UP).doubleValue();
+        vals[2] = d2.setScale(2, RoundingMode.HALF_UP).doubleValue();
+
+
+        return vals;
     }
 }
 

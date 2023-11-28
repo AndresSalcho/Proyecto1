@@ -2,16 +2,22 @@ package Projecto;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import Pruebas.ListaEnlazada;
 
 public class gEntradaSalida {
     String[] files, Local, Retiro, Entrega;
     String[] fechaL, fechaR, fechaE;
     String[] ValL, ValR, ValE;
+    double[] vL, vR, vE;
     int m;
     int aux;
     int save;
     Utilidades u = new Utilidades();
     uLogica ul = new uLogica();
+    ListaEnlazada<String> L = new ListaEnlazada<>();
+    ListaEnlazada<String> R = new ListaEnlazada<>();
+    ListaEnlazada<String> E = new ListaEnlazada<>();
+
     gEntradaSalida(String ll, String rr, String ee, int mm){
         files = new String[]{ll, rr, ee};
         m = mm;
@@ -53,30 +59,23 @@ public class gEntradaSalida {
         Retiro = u.convertNotNull(Retiro);
         Entrega = u.convertNotNull(Entrega);
 
+        for (String s : Local){
+            L.addFinal(s);
+        }
+        for (String s : Retiro){
+            R.addFinal(s);
+        }
+        for (String s : Entrega){
+            E.addFinal(s);
+        }
+
         ValL = ul.getTotal(Local);
         ValR = ul.getTotal(Retiro);
         ValE = ul.getTotal(Entrega);
 
-        for (String f : ValL){
-            if (f != null) {
-                System.out.println(f);
-            }
-        }
-        /*
-        System.out.println(" ");
-        for (String f : Retiro){
-            if (f != null) {
-                System.out.println(f);
-            }
-        }
-        System.out.println(" ");
-        for (String f : Entrega){
-            if (f != null) {
-                System.out.println(f);
-            }
-        }
-         */
-
+        vL = ul.getMargen(ValL);
+        vR = ul.getMargen(ValR);
+        vE = ul.getMargen(ValE);
 
     }
 

@@ -3,7 +3,7 @@ package Pruebas;
 public class ListaEnlazada<T> {
     Nodo<T> cabeza;
 
-    ListaEnlazada() {
+    public ListaEnlazada() {
         cabeza = null;
     }
 
