@@ -1,6 +1,7 @@
 package Projecto;
 import  com.aspose.cells.Workbook;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -116,5 +117,12 @@ public class Utilidades {
     public double DecimalF(double d){
         BigDecimal b = new BigDecimal(d);
         return b.setScale(2, RoundingMode.HALF_UP).doubleValue();
+    }
+    public void cls(){
+        try{
+            new ProcessBuilder("cmd","/c","cls").inheritIO().start().waitFor();
+        }catch (IOException | InterruptedException e){
+            return;
+        }
     }
 }

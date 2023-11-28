@@ -9,7 +9,7 @@ public class Menu {
     String r;
     String e;
     int m;
-    Utilidades u = new Utilidades();
+    static Utilidades u = new Utilidades();
 
     Menu(String ll, String rr, String ee, int mm) {
         l = ll;
@@ -20,12 +20,16 @@ public class Menu {
 
     public void run() {
         try {
+            u.cls();
             System.out.println("Procesando archivos por favor espere...");
-            Thread.sleep(1000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             return;
         }
+
+        u.cls();
         gEntradaSalida s = new gEntradaSalida(l, r, e, m);
+
         if (s.vL[2] > s.vR[2] && s.vL[2] > s.vE[2]) {
             System.out.println("Las ventas en el local tienen la mayor ganncia con " + s.vL[2] + " lo que significa un " + u.DecimalF(s.vL[2] / s.vL[1] * 100) + "% de Ganancia");
             if (s.vR[2] > s.vE[2]) {
@@ -82,6 +86,7 @@ public class Menu {
                 int key = e.getKeyCode();
                 if(key == 76){
                     if (!lpress[0]){
+                        u.cls();
                         System.out.println("-------------------------------------------------------------------");
                         System.out.println("Está viendo las ventas en el Local de los últimos " + s.m + " meses");
                         System.out.println("-------------------------------------------------------------------");
@@ -100,6 +105,7 @@ public class Menu {
                 }
                 if(key == 82){
                     if (!rpress[0]){
+                        u.cls();
                         System.out.println("------------------------------------------------------------------");
                         System.out.println("Está viendo las ventas por Retiro de los últimos " + s.m + " meses");
                         System.out.println("------------------------------------------------------------------");
@@ -118,6 +124,7 @@ public class Menu {
                 }
                 if(key == 69){
                     if (!epress[0]){
+                        u.cls();
                         System.out.println("-----------------------------------------------------------------");
                         System.out.println("Está viendo las mediante Entrega de los últimos " + s.m + " meses");
                         System.out.println("-----------------------------------------------------------------");
