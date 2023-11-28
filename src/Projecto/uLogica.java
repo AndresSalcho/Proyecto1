@@ -2,7 +2,6 @@ package Projecto;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
 
 public class uLogica {
@@ -64,9 +63,9 @@ public class uLogica {
         String[] aux = new String[a.length - 1];
         for (int i = 0; i<f.length; i++){
             CharSequence cs = f[i];
-            for (int j = 0; j<a.length; j++){
-                if (a[j].contains(cs)){
-                    aux[i] = a[j];
+            for (String s : a) {
+                if (s.contains(cs)) {
+                    aux[i] = s;
                 }
             }
         }
